@@ -3,66 +3,68 @@ import "./App.css";
 
 export default function App() {
   const [yesPressed, setYesPressed] = useState(false);
+  const [stage, setStage] = useState(0);
   const [noCount, setNoCount] = useState(0);
 
+  // NO button phrases
   const phrases = [
-    "No",
-    "You sure?",
-    "Like… 100% sure?",
-    "Inti don’t do me like that 😭",
-    "I said flowers though 💐",
-    "EP2 was literally for us…",
-    "Story of Omar too??",
-    "Okay wow 😔",
-    "So… what happened to NBA kids?? 🏀😭",
-    "I wanted us exclusive by spring 😭",
-    "Married by year end was the plan btw…",
-    "Alright I’m done asking 😭🤍",
+    "HELL NO",
+    "You sure?? 😭",
+    "Inti don’t do me like that 🥲",
+    "So what happened to NBA kids?? 🏀😂",
+    "What happened to getting you out the snow? ❄️😮‍💨",
+    "Or we build snowmans together?? ⛄️😭",
+    "We can witness a ring together before the Cowboys 😭💍⭐️",
+    "EP2: The Journey of Omar too?? 📺😂",
+    "Okay wow 😭",
+    "Alright I’m hurt 🥲",
+    "Last chance 😭",
   ];
 
-  const yesButtonSize = noCount * 20 + 16;
+  const getNoText = () => phrases[Math.min(noCount, phrases.length - 1)];
 
-  function handleNoClick() {
-    setNoCount(noCount + 1);
-  }
+  const handleNoClick = () => {
+    setNoCount((prev) => prev + 1);
+  };
+
+  const handleYesClick = () => {
+    if (stage === 0) setStage(1);
+    else if (stage === 1) setStage(2);
+    else setYesPressed(true);
+  };
+
+  const getYesText = () => {
+    if (stage === 0) return "Hey Inti, will you be my Valentine? 💌";
+    if (stage === 1) return "So you’re saying I’m your first & only Valentine? 👀💐";
+    return "This means we’re exclusive then? 😭🤝🏾";
+  };
 
   return (
     <div className="valentine-container">
       {!yesPressed ? (
         <>
-          <img
-            className="valentine-gif"
-            alt="cute gif"
-            src="https://media.tenor.com/0AVbKGY_MxMAAAAi/bear-hug-love.gif"
-          />
-
-          <h1 className="valentine-text">Inti… will you be my Valentine? 💌</h1>
+          <h1 className="valentine-text">{getYesText()}</h1>
 
           <div className="buttons">
-            <button
-              className="yes-button"
-              style={{ fontSize: `${yesButtonSize}px` }}
-              onClick={() => setYesPressed(true)}
-            >
-              Yes
+            <button className="yes-button" onClick={handleYesClick}>
+              YEE
             </button>
 
             <button className="no-button" onClick={handleNoClick}>
-              {phrases[Math.min(noCount, phrases.length - 1)]}
+              {getNoText()}
             </button>
           </div>
+
+          <p className="hint">(Be honest 😭)</p>
         </>
       ) : (
         <>
-          <img
-            className="valentine-gif"
-            alt="happy gif"
-            src="https://media.tenor.com/0AVbKGY_MxMAAAAi/bear-hug-love.gif"
-          />
           <h1 className="valentine-text">
-            Okay yayyy 😭💐 <br />
-            Flowers + EP2 + Story of Omar loading… 🤍
+            Okkayyy we locked in 😭 <br />
+            Flowers + EP2: The Journey of Omar 💐📺
           </h1>
+
+          <p className="final-note">Screenshot this so you don’t switch up later 😭</p>
         </>
       )}
     </div>
