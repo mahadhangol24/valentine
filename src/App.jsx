@@ -1,101 +1,71 @@
 import { useState } from "react";
-import lovesvg from "./assets/All You Need Is Love SVG Cut File.svg";
-import lovesvg2 from "./assets/Love In The Air SVG Cut File.svg";
+import "./App.css";
 
-export default function Page() {
-  const [noCount, setNoCount] = useState(0);
+export default function App() {
   const [yesPressed, setYesPressed] = useState(false);
+  const [noCount, setNoCount] = useState(0);
+
+  const phrases = [
+    "No",
+    "You sure?",
+    "Like… 100% sure?",
+    "Inti don’t do me like that 😭",
+    "I said flowers though 💐",
+    "EP2 was literally for us…",
+    "Story of Omar too??",
+    "Okay wow 😔",
+    "So… what happened to NBA kids?? 🏀😭",
+    "I wanted us exclusive by spring 😭",
+    "Married by year end was the plan btw…",
+    "Alright I’m done asking 😭🤍",
+  ];
+
   const yesButtonSize = noCount * 20 + 16;
 
-  const handleNoClick = () => {
+  function handleNoClick() {
     setNoCount(noCount + 1);
-  };
-
-  const getNoButtonText = () => {
-    const phrases = [
-      "No",
-      "Are you sure?",
-      "Really sure?",
-      "Think again!",
-      "Last chance!",
-      "Surely not?",
-      "You might regret this!",
-      "Give it another thought!",
-      "Are you absolutely certain?",
-      "This could be a mistake!",
-      "Have a heart!",
-      "Don't be so cold!",
-      "Change of heart?",
-      "Wouldn't you reconsider?",
-      "Is that your final answer?",
-      "You're breaking my heart ;(",
-      "Is that your final answer?",
-      "You're breaking my heart ;(",
-      "Plsss? :( You're breaking my heart",
-    ];
-
-    return phrases[Math.min(noCount, phrases.length - 1)];
-  };
+  }
 
   return (
-    <div className="overflow-hidden flex flex-col items-center justify-center pt-4 h-screen -mt-16 selection:bg-rose-600 selection:text-white text-zinc-900">
-      {yesPressed ? (
+    <div className="valentine-container">
+      {!yesPressed ? (
         <>
-          <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" />
-          <div className="text-4xl md:text-6xl font-bold my-4">
-            Ok Yayyyyy!!!
+          <img
+            className="valentine-gif"
+            alt="cute gif"
+            src="https://media.tenor.com/0AVbKGY_MxMAAAAi/bear-hug-love.gif"
+          />
+
+          <h1 className="valentine-text">Inti… will you be my Valentine? 💌</h1>
+
+          <div className="buttons">
+            <button
+              className="yes-button"
+              style={{ fontSize: `${yesButtonSize}px` }}
+              onClick={() => setYesPressed(true)}
+            >
+              Yes
+            </button>
+
+            <button className="no-button" onClick={handleNoClick}>
+              {phrases[Math.min(noCount, phrases.length - 1)]}
+            </button>
           </div>
         </>
       ) : (
         <>
           <img
-            src={lovesvg}
-            className="fixed animate-pulse top-10 md:left-24 left-6 md:w-40 w-28"
+            className="valentine-gif"
+            alt="happy gif"
+            src="https://media.tenor.com/0AVbKGY_MxMAAAAi/bear-hug-love.gif"
           />
-          <img
-            src={lovesvg2}
-            className="fixed bottom-16 -z-10 animate-pulse md:right-24 right-10 md:w-40 w-32"
-          />
-          <img
-            className="h-[230px] rounded-lg shadow-lg"
-            src="https://gifdb.com/images/high/cute-love-bear-roses-ou7zho5oosxnpo6k.webp"
-          />
-          <h1 className="text-4xl md:text-6xl my-4 text-center">
-            Will you be my Valentine?
+          <h1 className="valentine-text">
+            Okay yayyy 😭💐 <br />
+            Flowers + EP2 + Story of Omar loading… 🤍
           </h1>
-          <div className="flex flex-wrap justify-center gap-2 items-center">
-            <button
-              className={`bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg mr-4`}
-              style={{ fontSize: yesButtonSize }}
-              onClick={() => setYesPressed(true)}
-            >
-              Yes
-            </button>
-            <button
-              onClick={handleNoClick}
-              className=" bg-rose-500 hover:bg-rose-600 rounded-lg text-white font-bold py-2 px-4"
-            >
-              {noCount === 0 ? "No" : getNoButtonText()}
-            </button>
-          </div>
         </>
       )}
-      <Footer />
     </div>
   );
 }
 
-const Footer = () => {
-  return (
-    <a
-      className="fixed bottom-2 right-2 backdrop-blur-md opacity-80 hover:opacity-95 border p-1 rounded border-rose-300"
-      href="https://github.com/Xeven777/valentine"
-      target="__blank"
-    >
-      Made with{" "}
-      <span role="img" aria-label="heart">
-        ❤️
-      </span>
-    </a>
-  );
-};
