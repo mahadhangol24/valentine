@@ -1,6 +1,19 @@
 /* src/App.css */
+
+body {
+  margin: 0;
+}
+
 .valentine-container {
-  height: 100vh;
+  min-height: 100vh;
+  position: relative;
+
+  /* Jerry Jones GIF background */
+  background-image: url("https://media.giphy.com/media/ZExaQ5gNVeGrVY9245/giphy.gif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,17 +23,30 @@
   gap: 16px;
 }
 
-.valentine-gif {
-  width: 220px;
-  max-width: 85vw;
-  height: auto;
+/* Dark overlay so text is readable */
+.valentine-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.valentine-text,
+.hint,
+.final-note,
+.buttons {
+  position: relative;
+  z-index: 1;
 }
 
 .valentine-text {
-  font-size: 28px;
-  line-height: 1.2;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  padding: 14px 18px;
+  border-radius: 14px;
   margin: 0;
   max-width: 720px;
+  line-height: 1.2;
 }
 
 .buttons {
@@ -47,6 +73,7 @@
 .hint,
 .final-note {
   margin: 0;
-  opacity: 0.75;
-  font-weight: 600;
+  opacity: 0.9;
+  color: #fff;
+  font-weight: 700;
 }
